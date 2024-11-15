@@ -5,8 +5,8 @@ class Szamologep:
         self.master = master
         self.master.title("Számológép")
         
-        # Kijelző mező
-        self.kijelzo = tk.Label(master, text="", width=20, height=2, font=("Arial", 18), anchor='e')
+        # Kijelző mező (háttér kék)
+        self.kijelzo = tk.Label(master, text="", width=20, height=2, font=("Arial", 18), anchor='e', bg='blue', fg='white')
         self.kijelzo.grid(row=0, column=0, columnspan=4)
         
         # Számgombok és műveleti gombok
@@ -19,8 +19,14 @@ class Szamologep:
 
         # Gombok létrehozása
         for (text, row, col) in buttons:
+            button_color = "lightgray"  # Alap gomb szín
+            if text == "Clear":
+                button_color = "red"  # Törlés gomb piros
+            elif text == "=":
+                button_color = "green"  # Egyenlőség gomb zöld
+
             tk.Button(master, text=text, width=5, height=2, font=("Arial", 14), 
-                      command=lambda t=text: self.gomb_nyomas(t)).grid(row=row, column=col)
+                      command=lambda t=text: self.gomb_nyomas(t), bg=button_color, fg="white").grid(row=row, column=col)
         
         # Belső változók
         self.bevitel = ""  # A kijelzőre írandó érték
